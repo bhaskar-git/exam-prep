@@ -146,7 +146,7 @@ def generate_mock_study_plan():
 # Serve React frontend for all routes (SPA support)
 @app.route("/")
 def index():
-    return send_from_directory(app.static_folder, "index.html")
+    return send_from_directory(app.template_folder, "index.html")
 
 @app.route('/<path:path>')
 def serve_react(path):
