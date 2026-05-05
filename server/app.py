@@ -12,10 +12,10 @@ import os
 from datetime import datetime
 import json
 
-""" app = Flask(__name__, 
+app = Flask(__name__, 
            static_folder='../client/build/static',
-           template_folder='../client/build') """
-app = Flask(__name__, static_folder="../client/dist", static_url_path="")
+           template_folder='../client/build')
+""" app = Flask(__name__, static_folder="../client/dist", static_url_path="") """
 
 CORS(app)
 
