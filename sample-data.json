@@ -1,0 +1,12 @@
+{
+  "syllabus": "Mathematics: Algebra (Quadratic Equations, Polynomials), Calculus (Limits, Differentiation); Physics: Mechanics (Newton's Laws, Work and Energy), Thermodynamics",
+  "performanceHistory": "Mathematics - Jan 15: 65/100 (Algebra weak), Physics - Jan 20: 58/100 (Mechanics weak)",
+  "targetExam": "Engineering Entrance Exam",
+  "studyTime": "3",
+  "weakSubjects": [
+    "Quadratic Equations",
+    "Differentiation",
+    "Newton's Laws",
+    "Work and Energy"
+  ]
+}

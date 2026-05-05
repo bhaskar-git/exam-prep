@@ -1,0 +1,125 @@
+{
+  "name": "AI Exam Prep - Personalized Learning Assistant",
+  "description": "An AI-powered exam preparation solution that creates personalized study plans, generates adaptive quizzes, and tracks progress.",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "exam-prep",
+        "responseMode": "responseNode"
+      },
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "id": "webhook-trigger"
+    },
+    {
+      "parameters": {
+        "model": "gemini-1.5-flash",
+        "prompt": "You are an expert educational consultant. Based on the student's inputs, create a personalized study plan.\n\nStudent Profile:\n- Syllabus: {{$json.syllabus}}\n- Performance History: {{$json.performanceHistory}}\n- Target Exam: {{$json.targetExam}}\n- Available Study Time: {{$json.studyTime}} hours/day\n- Weak Subjects: {{$json.weakSubjects}}\n\nCreate a structured study plan that includes:\n1. Topic prioritization based on exam weightage and student weakness\n2. Weekly study schedule\n3. Daily milestones\n4. Recommended resources\n\nOutput in clean JSON format with clear structure.",
+        "temperature": 0.3,
+        "maxTokens": 3000
+      },
+      "name": "Personalized Study Plan Generator",
+      "type": "n8n-nodes-base.googleGemini",
+      "typeVersion": 1,
+      "position": [500, 300],
+      "credentials": { "googleApi": "geminiOAuth" },
+      "id": "study-plan-generator"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Process the study plan and extract key elements\nconst studyPlan = items[0].json;\n\n// Extract topics and create adaptive quiz structure\nconst topics = studyPlan.syllabus?.topics || [];\nconst weakAreas = studyPlan.weakSubjects || [];\nconst studyTime = studyPlan.studyTime || 2;\n\n// Generate adaptive quiz configuration\nconst quizConfig = {\n  difficultyAdaptation: true,\n  timeLimit: studyTime * 60,\n  questionMix: {\n    easy: 40,\n    medium: 35,\n    hard: 20,\n    review: 5\n  },\n  focusAreas: weakAreas\n};\n\n// Create daily study schedule\nconst dailySchedule = {\n  duration: studyTime * 60,\n  blocks: [\n    { activity: 'Review', time: 15 },\n    { activity: 'New Content', time: Math.round(studyTime * 60 * 0.6) },\n    { activity: 'Practice Problems', time: Math.round(studyTime * 60 * 0.3) },\n    { activity: 'Break', time: 5 }\n  ]\n};\n\nreturn [{ \n  json: { \n    ...studyPlan,\n    quizConfig,\n    dailySchedule,\n    createdAt: new Date().toISOString()\n  } \n}];"
+      },
+      "name": "Study Scheduler",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [750, 300],
+      "id": "study-scheduler"
+    },
+    {
+      "parameters": {
+        "model": "gemini-1.5-flash",
+        "prompt": "Generate adaptive practice questions based on:\n- Focus Topics: {{$json.quizConfig.focusAreas}}\n- Difficulty Level: Adapt based on performance\n- Question Types: MCQ, Short Answer, Problem Solving\n\nCreate 5 practice questions with:\n1. Clear problem statements\n2. Multiple choice options\n3. Detailed explanations\n4. Time allocation suggestions\n\nFormat as JSON with question objects.",
+        "temperature": 0.5,
+        "maxTokens": 3000
+      },
+      "name": "Question Generator",
+      "type": "n8n-nodes-base.googleGemini",
+      "typeVersion": 1,
+      "position": [1000, 200],
+      "credentials": { "googleApi": "geminiOAuth" },
+      "id": "question-generator"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Analyze progress and generate insights\nconst data = items[0].json;\n\nconst progressMetrics = {\n  topicsCovered: 0,\n  practiceQuestionsAttempted: 0,\n  accuracyRate: '0%',\n  timeSpent: '0 hours',\n  weakAreasImproved: 0\n};\n\nconst motivationTips = [\n  'Consistent daily practice is more effective than cramming',\n  'Focus 70% of your time on weak areas',\n  'Take 5-minute breaks every hour to maintain focus',\n  'Track your progress weekly to stay motivated'\n];\n\nconst wellnessTips = [\n  'Study in 45-minute focused sessions',\n  'Get 7-8 hours of sleep nightly',\n  'Take one full day off per week',\n  'Stay hydrated and eat brain-healthy foods'\n];\n\nreturn [{ \n  json: { \n    ...data,\n    progressMetrics,\n    motivationTips,\n    wellnessTips,\n    nextSteps: 'Review today material and prepare for tomorrow topics'\n  } \n}];"
+      },
+      "name": "Progress Tracker",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1000, 400],
+      "id": "progress-tracker"
+    },
+    {
+      "parameters": {
+        "operation": "upload",
+        "fileName": "exam-prep-plan-{{$now}}.json",
+        "binaryPropertyName": "data",
+        "options": {}
+      },
+      "name": "Save to Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [1250, 300],
+      "credentials": { "googleApi": "googleDriveOAuth" },
+      "id": "save-to-drive"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "options": { "responseCode": 200 }
+      },
+      "name": "API Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 3,
+      "position": [1500, 300],
+      "id": "api-response"
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Personalized Study Plan Generator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Personalized Study Plan Generator": {
+      "main": [[{ "node": "Study Scheduler", "type": "main", "index": 0 }]]
+    },
+    "Study Scheduler": {
+      "main": [
+        [{ "node": "Question Generator", "type": "main", "index": 0 }],
+        [{ "node": "Progress Tracker", "type": "main", "index": 0 }]
+      ]
+    },
+    "Question Generator": {
+      "main": [[{ "node": "Save to Drive", "type": "main", "index": 0 }]]
+    },
+    "Progress Tracker": {
+      "main": [[{ "node": "Save to Drive", "type": "main", "index": 0 }]]
+    },
+    "Save to Drive": {
+      "main": [[{ "node": "API Response", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "versionId": "1"
+}

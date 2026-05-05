@@ -1,0 +1,319 @@
+What This Hackathon Is About:
+This is a Hackathon with limited time (ends on 5th May, 11:59 pm (IST)), self‑paced hackathon designed to help you think and build like an AI Generalist. 
+An AI Generalist is someone who can: 
+● Identify a real problem in their work or industry 
+● Decide where AI adds leverage (and where it doesn’t) 
+● Design a simple but effective AI system (prompts, workflows, tools) 
+● Ship an end-to-end usable solution by leveraging any of the AI tools you have learned with us so far This is not about flashy demos or complex tech. It’s about clear thinking, practical impact, and smart use of AI. How the Hackathon Works 
+● Submission deadline: 5th May, 11:59 pm (IST) 
+● You will think about and pick a real-world idea and build on your own during the week 
+● You submit your project at the end of 10 days The intro call explains the format. The real work happens after. What You Need to Build 
+● A working AI‑powered solution. You can leverage tools like N8N, Emergent, Gemini Studio, make.com, etc. 
+● The solution you build should leverage AI, and the problem statement should be very realistic and real-world. Evaluation Criteria (100 Points)
+- Problem Framing – 25 pts 
+Is the problem real, specific, and relevant to professionals/students/businesses/freelancers (can be a problem from any profession or domain)?
+- AI Leverage & System Design – 30 pts 
+Is AI used thoughtfully? Does it add real leverage?
+- Practical Usefulness – 20 pts 
+Does this save time, reduce effort, or improve outcomes?
+- Execution Quality – 15 pts 
+Does it work end‑to‑end? Is it usable? (You need to submit a video/screen recording that shows that your solution is working end-to-end.)
+- Clarity of Explanation – 10 pts 
+Can you clearly explain what you built and why it matters? We reward clarity and usefulness, not complexity.
+
+
+
+01 · Overview
+What this is, in 30 seconds.
+A 10-day, self-paced hackathon where you build a working AI-powered solution to a real problem from your world.
+You work on your own schedule — there's no all-nighter, no 48-hour clock, no team coordination. You pick a real problem (from your job, your domain, your daily life), build something that uses AI meaningfully to solve it, and submit before 11:59 pm on 5 May.
+Whether you've never coded or you build software for a living, this hackathon fits. No-code tools are welcome. Code is welcome. The judges care about the problem you pick and how smartly you use AI — not the tools or lines of code.
+How it works
+1
+Pick a real-world problem you actually understandFrom your work, your domain, your daily life
+From your work, your domain, your daily life
+The best problems come from your own frustrations. What task in your week eats 3 hours and you'd pay to never do again? That's your candidate. Skip problems in fields you don't actually work in — judges can smell it when you're pretending ›
+2
+Build something that uses AI meaningfullyWorkflow, agent, app, dashboard — anything
+Workflow, agent, app, dashboard — anything
+"Meaningfully" is the key word. If your AI step could be replaced with a simple if-then rule, the AI isn't earning its place. Make sure removing the AI would break the solution — that's your north star.③
+Record a 5–10 minute demo videoCamera on is strongly recommended
+›
+3
+Record a 5–10 minute demo videoCamera on is strongly recommended
+Camera on is strongly recommended
+Walk through the problem, show the solution running end-to-end, explain where AI is doing work, close with the impact. Loom, OBS, or your OS's built-in recorder all work. English or Hindi — not other languages›
+
+4
+Submit Drive link + Google Form + LinkedIn postThree pieces. All mandatory.
+Three pieces. All mandatory.
+›
+Full details in the submission chapter below. Submission = registration — no separate sign-up needed.
+
+02 · The Brief
+One sentence carries everything.
+★ The brief
+Build a working AI-powered solution that solves a real-world problem — and justify why AI belongs in it.
+The two questions, every time
+Whenever you're about to commit to an idea, a feature, a direction — ask both. If both honest answers are yes, proceed. If not, refine.
+Q1
+Am I solving a real-world problem?Not a toy. Not a demo.
+›
+Q2
+Is my AI layer doing meaningful work?Load-bearing, not decorative
+›
+The "hours → seconds" test
+Is this a task that currently takes a human hours, and could AI do it in seconds? That's automation worth building. Example: reading a 300-page book and writing a 2-page summary is a week of human effort. For an LLM, it's under a minute.
+03 · Evaluation & Prizes
+100 points. Five categories.
+Everything below is what judges actually care about. Click any row to expand.
+01
+Problem framing
+25 PTS
+02
+AI leverage & system design
+30 PTS
+03
+Practical usefulness
+20 PTS
+04
+Execution quality
+15 PTS
+05
+Clarity of explanation
+10 PTS
+01
+Problem framingIs it real, specific, relevant?
+25 pts›
+02
+AI leverage & system designThoughtful use, not decorative
+30 pts›
+03
+Practical usefulnessTime saved, effort cut, numbers moved
+20 pts›
+04
+Execution qualityDoes it work end-to-end?
+15 pts›
+05
+Clarity of explanationThe video is a pitch, not evidence
+10 pts›
+Prizes
+1st Place
+🏆
+₹30,000
+2nd Place
+🥈
+₹20,000
+3rd Place
+🥉
+₹10,000
+Multiple firsts, seconds, and thirds are possible. Standout projects also get featured on the be10x LinkedIn and website.
+Start ugly·Ship real·Be 10X·Start ugly·Ship real·Be 10X·Start ugly·Ship real·Be 10X·Start ugly·Ship real·Be 10X·
+04 · Tools
+Two pools. Mix them freely.
+Use what you already know. If you're new to all of these, start with Lovable (no-code app) or n8n (workflow automation) — they're the most forgiving.
+Pool A — No-code / vibe-code builders
+You describe the app in plain English. The platform builds it. Use these if your idea is an app, website, dashboard, form, or calculator.
+
+FREE DAILY
+Lovable
+Web apps & dashboards. 5 free credits per day — plenty for one hackathon build.
+Open →
+PAID · ₹249/50 credits
+Emergent
+Powerful builder. 50 credits is enough for one strong project.
+Open →
+FREE TIER
+Cursor AI
+AI-assisted IDE. Great if you want to peek at the code too.
+Open →
+FREE TIER
+Replit
+Classic low-code playground with AI built in.
+Open →
+FREE
+Google AI Studio
+Prompt-based prototyping with Gemini models.
+Open →
+FREE TIER
+Copilot Studio
+Microsoft's no-code AI agent builder.
+Open →
+Pool B — Workflow automation
+Drag-and-drop nodes. Connect Gmail to Slack to OpenAI to Sheets. Use these if your idea is a pipeline: data in, AI processes, output somewhere.
+
+14-DAY TRIAL · FREE SELF-HOST
+n8n
+Massive integration library. See the dot-hack in section 8 to extend free trials.
+Open →
+FREE TIER
+Make.com
+Beautiful visual interface. Free tier is generous.
+Open →
+FREE TIER
+Zapier
+Industry standard. Limited free ops but very reliable.
+Open →
+FREE TIER
+Vapi
+Voice AI agents. Best if your idea is a voice assistant.
+Open →
+Screen recording
+For your mandatory demo video. Any of these work:
+
+FREE · 3 RECORDINGS
+Loom
+Up to 30 min each. Fastest setup.
+
+FREE · ALREADY INSTALLED
+OS built-in
+Windows: Win+G · macOS: Cmd+Shift+5
+
+FREE · PRO-GRADE
+OBS Studio
+Open source. More setup, more control.
+
+Free website hosting
+Only needed if you built a website. Your link must be live and public before submission.
+
+Netlify
+Drag-and-drop deploys. Generous free tier.
+
+GitHub Pages
+Free static hosting from a GitHub repo.
+
+Vercel
+Best for Next.js and modern frameworks.
+
+Render
+Free tier for static and simple dynamic sites.
+
+05 · How to Submit
+Three pieces. Don't miss one.
+Drive folder + Google Form + LinkedIn post. Each has a specific shape. Do them in this order on submission day.
+Piece 1 — The Drive folder
+Open your Google Drive. Create one parent folder named "Hackathon Submission" or "[Your project name] — Hackathon Submission". Inside, create exactly four sub-folders. Click the folder below to see the structure.
+📁 Hackathon Submission / [your project name]›
+⚠ #1 reason submissions get disqualified
+Share your folder correctly. Right-click → Share → Share. Two things must happen: (1) Add product@houseofedtech.in as Editor. (2) Set General Access to "Anyone with the link · Viewer." Do both. Not one. Both.
+Piece 2 — The Google Form
+Fill out the submission form and paste your Drive link inside. Three open-text questions — keep each answer to under 100 words and you're golden.
+Q1
+What real-world problem are you solving?Be specific. Name the user. Quantify if you can.
+›
+Q2
+Who is this problem for?Profession, domain, or broad user type
+›
+Q3
+How does your solution use AI?Name the model. Describe the step. Say why it matters.
+›
+💡 Let ChatGPT draft your answers
+Paste: "I built [short description of project]. Write structured, concise answers (under 100 words each) to these three questions: (1) What real-world problem are you solving? (2) Who is this problem for? (3) How does your solution use AI?" Edit to sound like you.
+Piece 3 — The LinkedIn post
+Announce your project on LinkedIn and tag @Be10X before 5 May midnight. This turns your 10 days of work into a permanent career asset.
+LI
+The LinkedIn post templateCopy, paste, personalize
+›
+
+
+
+
+
+
+
+
+If you can't post on LinkedIn (employer restrictions)
+Mention it in your submission. The team is reasonable about genuine employer-restriction cases — just flag it so they don't dock you for it.
+06 · Mandatory Checklist
+Walk through this on submission day.
+Your progress persists in this browser — tick things off as you complete them. Any missing item puts the submission at risk.
+Seven things to confirm
+0 of 7 complete
+✓
+1. Video recording of your working project — 5 to 10 minutes — placed in sub-folder 2.
+✓
+2. Problem-statement-and-solution document (Word / PDF / PPT) placed in sub-folder 1.
+✓
+3. Drive folder structured with the 4 sub-folders inside a parent folder.
+✓
+4. Drive folder shared both ways — (a) product@houseofedtech.in as Editor, AND (b) "Anyone with link · Viewer."
+✓
+5. Google Form submitted with Drive link pasted and three questions answered.
+✓
+6. LinkedIn post tagging @Be10X — before 5 May midnight.
+✓
+7. Only if you built a website: hosted on a free platform (Netlify / GitHub Pages / Lovable / Render / Cloudflare / Vercel).
+07 · Hacks & Tips
+Small tricks that save whole days.
+The n8n dot hack
+Extend your n8n 14-day trial indefinitely using a quirk of Gmail. Gmail ignores dots in addresses — yourname@gmail.com and your.name@gmail.com reach the same inbox. But n8n treats them as different users. OTPs still land in your original inbox. Click below to see examples.
+Originalnandiniraj@gmail.com
+Trial 2nandini.raj@gmail.com
+Trial 3nandi.ni.raj@gmail.com
+Trial 4n.andini.r.aj@gmail.com
+Export your workflows as JSON before a trial ends — so you can re-import them into the new account and not lose your work.
+Start ugly, finish polished
+Ship a working version by day 2. No styling. No polish. Just the core loop — input → AI step → output. Once that works, you have 8 days to make it pretty. If you spend day 1 on CSS, you'll discover on day 5 that your AI doesn't actually do what you thought, and now you're out of time.
+The principle
+Working-ugly beats beautiful-broken. Every single time.
+Use ChatGPT as your co-pilot the whole 10 days
+Keep it open in a tab. Every friction you hit, ask it first.
+•	→Stuck on an idea? "Give me 10 hackathon ideas in finance."
+•	→Prompt not working? "Improve this prompt: [paste]"
+•	→Video script? "Write a 7-min demo-video script for this project."
+•	→LinkedIn post? "Draft a LinkedIn post announcing this project."
+•	→Stuck on n8n? "How do I connect X to Y in n8n?"
+One rehearsal before recording
+Before you hit record on your final video, do a full run-through out loud without recording. You'll find two or three things you forgot to prepare. Fix them. Then record. This one rehearsal saves you from three failed takes.
+08 · FAQ
+Common questions, answered once.
+Will the deadline be extended?
+›
+Extremely unlikely. 5 May midnight is firm. Plan as if it will not move.
+Can I team up with someone?
+›
+No. Individual only. Group hackathons may come in future rounds.
+Can I submit multiple projects?
+›
+Yes, unlimited. Each one needs its own Drive folder and its own form submission.
+Do I need to register beforehand?
+›
+No. Submission equals registration. One form, at the end. Nothing else.
+Can I use a tool be10x didn't teach?
+›
+Absolutely. Any tool, taught or not. The only rule is that AI must play a meaningful role in your solution.
+Can I reuse an old project?
+›
+Yes — adapt it, extend it, add the AI layer where it was missing. Be honest in your write-up about what's new and what AI is adding. Don't submit last year's project unchanged.
+What if my idea is already a commercial product?
+›
+Totally fine. You're not judged on novelty — you're judged on whether YOU built it, whether it works, and whether it solves a real problem.
+Can I build a game or an ML model instead of an app?
+›
+Games: yes, if the game solves a real-world problem (e.g. education, habit-forming). Pure entertainment games are harder to justify. ML models: yes, as long as it's tied to a real use case and your video clearly shows the input-to-output pipeline working on real data.
+Are mentors available?
+›
+No dedicated mentors. Use LMS support, your trainers in existing sessions, and LinkedIn to ask the hosts directly.
+Will there be a certificate?
+›
+Team is finalizing format. Likely a participation e-certificate, with something additional for winners.
+When are results announced?
+›
+Judges start evaluating from Wednesday 6 May. Results realistically come the week of 11 May. Winners are contacted directly via LMS / email.
+What language for the video?
+›
+English or Hindi only. Judges come from varied regions; other languages can't be guaranteed coverage.
+09 · Quick Links
+Everything you need, one tap away.
+📝
+Submission formforms.gle/EBNvignd2SbH3M5C6
+⭐
+Early Achiever formforms.gle/1pFoQpHWXnVwDHWC8
+📁
+Sample Drive folderdrive.google.com/…
+🔗
+n8n templates (8,000+)n8n.io/workflows
+✉️
+Share Drive folder withproduct@houseofedtech.in
+
+
