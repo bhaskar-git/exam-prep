@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-// Configuration - Update this to your Flask server URL
-const FLASK_API_URL = 'http://localhost:5000/api';
-const USE_MOCK_DATA = false; // Set to true if Flask is not running
+// Configuration - Use relative API URL (works for both local and deployed)
+const API_BASE = '/api';
+const USE_MOCK_DATA = false; // Set to true to use demo data without backend
 
 function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -81,8 +81,8 @@ function App() {
         await new Promise(resolve => setTimeout(resolve, 1500));
         result = generateMockStudyPlan();
       } else {
-        // Call Flask API
-        const response = await fetch(`${FLASK_API_URL}/generate-plan`, {
+        // Call Flask API (relative URL works both locally and deployed)
+        const response = await fetch(`${API_BASE}/generate-plan`, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ CORS(app)
 # Configure Google Gemini
 # Set your API key as environment variable: GEMINI_API_KEY
 # Or replace directly below
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'YOUR_GEMINI_API_KEY_HERE')
+
 
 if GEMINI_API_KEY != 'YOUR_GEMINI_API_KEY_HERE':
     genai.configure(api_key=GEMINI_API_KEY)
