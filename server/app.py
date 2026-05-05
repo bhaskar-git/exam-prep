@@ -1,30 +1,34 @@
+
+
 """
 AI Exam Prep - Flask Backend
 Personalized Learning Assistant using Google Gemini AI
 """
 
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, render_template
 from flask_cors import CORS
 import google.generativeai as genai
 import os
 from datetime import datetime
 import json
 
-app = Flask(__name__)
+""" app = Flask(__name__, 
+           static_folder='../client/build/static',
+           template_folder='../client/build') """
+app = Flask(__name__, static_folder="../client/dist", static_url_path="")
+
 CORS(app)
 
 # Configure Google Gemini
-# Set your API key as environment variable: GEMINI_API_KEY
-# Or replace directly below
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyAPoRTzz7sMU2Sp7_jTwomNeh8TfohJO0k')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'YOUR_GEMINI_API_KEY_HERE')
 
-if GEMINI_API_KEY != 'YOUR_GEMINI_API_KEY_HERE':
+if GEMINI_API_KEY and GEMINI_API_KEY != 'YOUR_GEMINI_API_KEY_HERE':
     genai.configure(api_key=GEMINI_API_KEY)
     model = genai.GenerativeModel('gemini-1.5-flash')
 else:
     model = None
 
-# In-memory storage (replace with database for production)
+# In-memory storage
 study_plans = {}
 
 
@@ -44,18 +48,15 @@ Create a structured study plan in JSON format with:
 1. Weekly schedule (7 days)
 2. Priority topics with weightage
 3. Daily routine (morning, afternoon, evening)
-4. Progress metrics (initialize with 0 values)
+4. Progress metrics
 5. Wellness tips (4-5 tips)
 6. Motivation tips (4-5 tips)
 
-Return ONLY valid JSON, no other text. Use this exact JSON structure:
-{{"weeklySchedule": [{{"day": "Monday", "topics": ["topic1"], "duration": "2 hours", "focus": "focus area"}}], "priorityTopics": [{{"name": "topic name", "priority": "High/Medium/Low", "weightage": "percentage"}}], "dailySchedule": {{"morning": {{"activity": "activity", "time": "duration"}}, "afternoon": {{...}}, "evening": {{...}}}}, "progressMetrics": {{}}, "wellnessTips": ["tip1"], "motivationTips": ["tip1"]}}"""
+Return ONLY valid JSON."""
     
     response = model.generate_content(prompt)
     
-    # Parse the JSON response
     try:
-        # Find JSON in response
         text = response.text
         start = text.find('{')
         end = text.rfind('}') + 1
@@ -66,25 +67,17 @@ Return ONLY valid JSON, no other text. Use this exact JSON structure:
     except Exception as e:
         print(f"Error parsing AI response: {e}")
     
-    # Fallback to mock data if AI fails
     return generate_mock_study_plan()
 
 
 def generate_questions_with_ai(focus_areas):
     """Generate practice questions using Gemini AI"""
     
-    prompt = f"""Generate 5 adaptive practice questions based on:
+    prompt = f"""Generate 5 practice questions based on:
 - Focus Topics: {focus_areas}
-- Difficulty Level: Mix of Easy, Medium, Hard
-- Question Types: MCQ, Short Answer, Problem Solving
+- Include: question, options, correct answer, explanation
 
-Create questions with:
-1. Clear problem statements
-2. Multiple choice options (for MCQ)
-3. Detailed explanations
-
-Return ONLY valid JSON array with this structure:
-[{{"id": 1, "question": "question text", "options": ["a", "b", "c", "d"], "correct": 0, "explanation": "explanation"}}]"""
+Return ONLY valid JSON array."""
     
     response = model.generate_content(prompt)
     
@@ -142,20 +135,51 @@ def generate_mock_study_plan():
             "You are making progress! Keep it up!",
             "Focus on understanding, not just memorization",
             "Small improvements compound over time"
+        ],
+        "practiceQuestions": [
+            {"id": 1, "question": "Solve: x² - 5x + 6 = 0", "options": ["x=2,3", "x=-2,-3", "x=1,6", "x=-1,-6"], "correct": 0, "explanation": "Using quadratic formula"},
+            {"id": 2, "question": "Find derivative of x³", "options": ["x²", "3x²", "3x³", "x³/3"], "correct": 1, "explanation": "Power rule: d/dx(xⁿ) = nxⁿ⁻¹"}
         ]
     }
 
 
-@app.route('/')
+# Serve React frontend for all routes (SPA support)
+@app.route("/")
 def index():
-    """Home page"""
+    return send_from_directory(app.static_folder, "index.html")
+
+@app.route('/<path:path>')
+def serve_react(path):
+    """Serve the React app for all non-API routes"""
+    # If it's an API request, return 404
+    if path.startswith('api/'):
+        return jsonify({"error": "API endpoint not found"}), 404
+    
+    # Try to serve the index.html
+    try:
+        return send_from_directory(app.template_folder, 'index.html')
+    except:
+        # If no build exists, return API info
+        return jsonify({
+            "message": "AI Exam Prep API",
+            "version": "1.0",
+            "note": "Build the React client for full app",
+            "endpoints": {
+                "/api/generate-plan": "POST - Generate study plan",
+                "/api/health": "GET - Health check"
+            }
+        })
+
+
+@app.route('/api')
+def api_info():
+    """API information"""
     return jsonify({
         "message": "AI Exam Prep API",
         "version": "1.0",
         "endpoints": {
-            "/api/generate-plan": "POST - Generate personalized study plan",
-            "/api/generate-questions": "POST - Generate practice questions",
-            "/api/get-plan/<plan_id>": "GET - Get a specific study plan",
+            "/api/generate-plan": "POST - Generate study plan",
+            "/api/generate-questions": "POST - Generate questions",
             "/api/health": "GET - Health check"
         }
     })
@@ -177,31 +201,23 @@ def generate_plan():
     try:
         data = request.get_json()
         
-        # Extract data
         syllabus = data.get('syllabus', '')
         performance_history = data.get('performanceHistory', '')
         target_exam = data.get('targetExam', '')
         study_time = data.get('studyTime', '3')
         weak_subjects = data.get('weakSubjects', '')
         
-        # Generate study plan
         if model:
             study_plan = generate_study_plan_with_ai(
-                syllabus, 
-                performance_history, 
-                target_exam, 
-                study_time, 
-                weak_subjects
+                syllabus, performance_history, target_exam, study_time, weak_subjects
             )
         else:
             study_plan = generate_mock_study_plan()
         
-        # Generate questions
         if model:
             questions = generate_questions_with_ai(weak_subjects)
             study_plan['practiceQuestions'] = questions
         
-        # Store plan
         plan_id = f"plan_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         study_plans[plan_id] = study_plan
         
@@ -213,10 +229,7 @@ def generate_plan():
         })
         
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "error": str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 @app.route('/api/generate-questions', methods=['POST'])
@@ -238,47 +251,22 @@ def generate_questions():
         })
         
     except Exception as e:
-        return jsonify({
-            "success": False,
-            "error": str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 @app.route('/api/get-plan/<plan_id>', methods=['GET'])
 def get_plan(plan_id):
     """Get a specific study plan"""
     if plan_id in study_plans:
-        return jsonify({
-            "success": True,
-            "plan": study_plans[plan_id]
-        })
-    return jsonify({
-        "success": False,
-        "error": "Plan not found"
-    }), 404
-
-
-@app.route('/api/plans', methods=['GET'])
-def get_all_plans():
-    """Get all study plans"""
-    return jsonify({
-        "success": True,
-        "plans": study_plans
-    })
-
-
-# Serve static files (for frontend)
-@app.route('/static/<path:path>')
-def serve_static(path):
-    return send_from_directory('static', path)
+        return jsonify({"success": True, "plan": study_plans[plan_id]})
+    return jsonify({"success": False, "error": "Plan not found"}), 404
 
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
     print("=" * 50)
     print("🚀 AI Exam Prep - Flask Backend")
     print("=" * 50)
-    print("\nTo configure Gemini AI:")
-    print("  Set GEMINI_API_KEY environment variable")
-    print("  OR edit app.py and replace 'YOUR_GEMINI_API_KEY_HERE'")
-    print("\nStarting server...")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    print(f"\nAI Configured: {model is not None}")
+    print(f"Server running on port {port}")
+    app.run(debug=True, host='0.0.0.0', port=port)

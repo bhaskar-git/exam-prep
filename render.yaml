@@ -2,8 +2,12 @@ services:
   - type: web
     name: exam-prep
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --host=0.0.0.0 --port=$PORT
+    buildCommand: |
+      cd client && npm install && npm run build
+      pip install -r requirements.txt
+    startCommand: gunicorn server.app:app
     envVars:
+      - key: FLASK_ENV
+        value: production
       - key: GEMINI_API_KEY
         sync: false
